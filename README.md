@@ -24,5 +24,5 @@ The table layout is as follows
 
 Two different applications exist
 
-- usermodel_initial - This is the initial application to which we will add the "bells and whistles" related to exception handling, custom swagger documentation, and accessing other API's data.
-- usermodel - the finished version with many "bells and whistles" added. Note that a few additions to the application seem "forced" or out of place. These are done specifically to show how to use certain commands!
+- usermodel-exceptions-initial - This is the initial application to which we will add the "bells and whistles" related to exception handling, custom swagger documentation, and accessing other API's data.
+- usermodel-exceptions - the finished version with many "bells and whistles" added. Note that a few additions to the application seem "forced" or out of place. These are done specifically to show how to use certain commands!

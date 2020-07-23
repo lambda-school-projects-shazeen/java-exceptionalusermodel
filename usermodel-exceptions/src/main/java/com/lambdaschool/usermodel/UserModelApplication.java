@@ -68,6 +68,6 @@ public class UserModelApplication
 
         // now run the real application!
         SpringApplication.run(UserModelApplication.class,
-            args);
+                              args);
     }
 }

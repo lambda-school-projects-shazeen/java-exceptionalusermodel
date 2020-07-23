@@ -1,8 +1,7 @@
 package com.lambdaschool.usermodel.controllers;
 
-import com.lambdaschool.usermodel.UserModelApplication;
-import com.lambdaschool.usermodel.handlers.HelperFunctions;
 import com.lambdaschool.usermodel.models.CountryData;
+import com.lambdaschool.usermodel.services.HelperFunctionsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -37,7 +36,7 @@ public class CountryDataController
      * Allows this class to use the Helper Function class
      */
     @Autowired
-    HelperFunctions hf;
+    HelperFunctionsImpl helperFunctions;
 
     /**
      * Populates a public field from the main class. That field contains data from the last queried country
@@ -68,11 +67,11 @@ public class CountryDataController
         };
         // create the response entity. do the get and get back information
         ResponseEntity<CountryData> responseEntity = restTemplate.exchange(requestURL,
-            HttpMethod.GET,
-            null,
-            responseType);
+                                                                           HttpMethod.GET,
+                                                                           null,
+                                                                           responseType);
         // now that we have our data, put it into our list!
-        hf.ourCountryData = responseEntity.getBody();
+        helperFunctions.ourCountryData = responseEntity.getBody();
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -85,12 +84,13 @@ public class CountryDataController
     @GetMapping("/currentcountrydata")
     public ResponseEntity<?> listInfoForCountryData()
     {
-        return new ResponseEntity<>(hf.ourCountryData,
+        return new ResponseEntity<>(helperFunctions.ourCountryData,
             HttpStatus.OK);
     }
 
     /**
      * Endpoint used to test parameters
+     * <br>Example: <a href="http://localhost:2019/otherapis/testing?testing=john">http://localhost:2019/otherapis/testing?testing=john</a>
      *
      * @param testing a just string that gets reported back to the user
      * @return The string from testing and status OK
