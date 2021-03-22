@@ -1,5 +1,6 @@
 package com.lambdaschool.usermodel.services;
 
+import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import com.lambdaschool.usermodel.models.Role;
 import com.lambdaschool.usermodel.repository.RoleRepository;
 import com.lambdaschool.usermodel.repository.UserRepository;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class RoleServiceImpl
     public Role findRoleById(long id)
     {
         return rolerepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Role id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RoleServiceImpl
             return rr;
         } else
         {
-            throw new EntityNotFoundException(name);
+            throw new ResourceNotFoundException(name);
         }
     }
 
@@ -102,7 +102,7 @@ public class RoleServiceImpl
     {
         if (role.getName() == null)
         {
-            throw new EntityNotFoundException("No role name found to update!");
+            throw new ResourceNotFoundException("No role name found to update!");
         }
 
         if (role.getUsers()
